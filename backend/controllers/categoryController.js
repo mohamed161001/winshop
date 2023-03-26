@@ -54,7 +54,7 @@ const createCategory = async (req , res)=>{
     });
 }
 
-// *delete a category
+// delete a category
 const deleteCategory = async (req, res) => {
     const { id } = req.params;
   

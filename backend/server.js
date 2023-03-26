@@ -6,6 +6,7 @@ const categoryRoutes = require ('./routes/categories')
 const orderRoutes = require('./routes/orders')
 const storeRoutes = require ('./routes/stores')
 const themeRoutes = require ('./routes/themes')
+const userRoutes = require ('./routes/user')
 // express app
 const app = express ()
 
@@ -18,6 +19,7 @@ app.use((req,res,next)=>{
 
 
 //routes
+app.use('/api/user',userRoutes)
 app.use('/api/stores',storeRoutes)
 app.use('/api/themes', themeRoutes)
 app.use('/api/products' ,productRoutes)
