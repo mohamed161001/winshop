@@ -28,7 +28,9 @@ const getTheme = async (req,res)=>{
 }
 
 // update the default theme // hedha eli we7el fih // bech testa3mel logoUpload , heroImageUpload w faviconUpload eli 7atithom mel fou9
+// update the default theme  
 const updateTheme = async (req,res)=>{}
+  
 
 
   

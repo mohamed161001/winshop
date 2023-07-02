@@ -12,6 +12,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< Updated upstream
+=======
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+>>>>>>> Stashed changes
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongoose": "^7.0.1",

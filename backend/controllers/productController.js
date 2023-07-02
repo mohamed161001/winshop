@@ -1,7 +1,7 @@
 const Product = require ('../models/productModel')
 const mongoose = require ('mongoose')
 const Category = require('../models/categoryModel')
-const multipleImageUpload = require('../middlewares/multerMiddleware/multipleImageUpload')
+const singleImageUpload = require('../middlewares/multerMiddleware/singleImageUpload')
 
 //* get all products
 const getProducts = async (req, res) => {
@@ -21,7 +21,7 @@ const getProducts = async (req, res) => {
             name: product.name,
             description: product.description,
             price: product.price,
-            images: product.images,
+            image: product.image,
             category: product.category.name,
             quantity: product.quantity,
             createdAt: product.createdAt,
@@ -34,7 +34,7 @@ const getProducts = async (req, res) => {
             name: product.name,
             description: product.description,
             price: product.price,
-            images: product.images,
+            image: product.image,
             category: null,
             quantity: product.quantity,
             createdAt: product.createdAt,
@@ -74,7 +74,7 @@ const getProduct = async (req,res) => {
         name: product.name,
         description: product.description,
         price: product.price,
-        images: product.images,
+        image: product.image,
         category: categoryName,
         quantity: product.quantity,
         createdAt: product.createdAt,
@@ -90,7 +90,7 @@ const getProduct = async (req,res) => {
 
 // *create a product 
 const createProduct = async (req, res) => {
-  multipleImageUpload(req, res, async function (err) {
+  singleImageUpload(req, res, async function (err) {
     if (err) {
       return res.status(400).json({ error: err.message });
     }
@@ -99,7 +99,7 @@ const createProduct = async (req, res) => {
       name: req.body.name,
       description: req.body.description,
       price: req.body.price,
-      images: req.files.map(file => file.filename), // get filenames of all uploaded images
+      image: req.file.filename, // get filenames of all uploaded images
       category: null, // set the category to null
       quantity: req.body.quantity,
     };
@@ -157,8 +157,8 @@ const updateProduct = async (req, res) => {
       return res.status(404).json({ error: 'produit inexistant' });
     }
 
-    // Handle image uploads
-    await multipleImageUpload(req, res, async function (err) {
+    // Handle image upload
+    await singleImageUpload(req, res, async function (err) {
       if (err) {
         return res.status(400).json({ error: err.message });
       }
@@ -180,11 +180,11 @@ const updateProduct = async (req, res) => {
         quantity: req.body.quantity,
       };
 
-      // If new images were uploaded, update the 'images' field
-      if (req.files.length > 0) {
-        updatedProduct.images = req.files.map(file => file.filename);
+      // If a new image is uploaded, update the 'image' field
+      if (req.file) {
+        updatedProduct.image = req.file.filename;
       } else {
-        updatedProduct.images = product.images;
+        updatedProduct.image = product.image;
       }
 
       const updatedProductObj = await Product.findByIdAndUpdate(id, updatedProduct, {
@@ -198,6 +198,7 @@ const updateProduct = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
 
   
 

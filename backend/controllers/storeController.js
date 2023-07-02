@@ -47,12 +47,12 @@ const createStore = async (req, res) => {
     
       // Create a new theme with the uploaded default images
       const theme = await Theme.create({
-        logo: logoFilename,
-        favicon: faviconFilename,
+        logo: "",
+        favicon: "",
         navbarColor: '#ffffff',
         bodyColor: '#f0f0f0',
         footerColor: '#000000',
-        heroImage: heroImageFilename,
+        heroImage: "",
         heroText: 'Welcome to our store!',
       });
   

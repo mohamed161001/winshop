@@ -19,7 +19,7 @@ const getOrder = async (req,res)=>{
     if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error : 'commande inexistante'})
     }
-    const order = await Order.findById(id)
+    const order = await Order.findById(id).populate('products.product', 'name image price')
     if(!order){
         return res.status(404).json({error : 'commande inexistante'})
     }

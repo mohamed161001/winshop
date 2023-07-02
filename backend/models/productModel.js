@@ -20,10 +20,10 @@ const productSchema = new Schema ({
         required : true 
     },
 
-    images : [{
+    image : {
         type : String ,
         required : true
-    }],
+    },
 
     category : {
         type: mongoose.Schema.Types.ObjectId,
